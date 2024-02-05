@@ -63,6 +63,18 @@ export const remove = async(id) => {
   }
 };
 
+export const removeMany = async(boardId) => {
+  try {
+    await Cards.destroy({
+      where: {
+        boardId,
+      },
+    });
+  } catch (error) {
+    throw ApiError.cannotPost('Cannot delete cards');
+  }
+};
+
 export const update = async(id, data) => {
   await Cards.update({ ...data }, {
     where: { id },

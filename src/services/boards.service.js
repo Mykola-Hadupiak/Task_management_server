@@ -1,5 +1,6 @@
 import { ApiError } from '../exeptions/api.error.js';
 import { Boards } from '../models/boards.js';
+import * as cardsService from './cards.service.js';
 
 export const getById = async(id) => {
   try {
@@ -29,4 +30,6 @@ export const remove = async(id) => {
       id,
     },
   });
+
+  await cardsService.removeMany(id);
 };
