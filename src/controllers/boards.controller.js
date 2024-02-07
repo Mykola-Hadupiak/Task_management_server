@@ -1,7 +1,7 @@
 import { ApiError } from '../exeptions/api.error.js';
 import * as boardsService from '../services/boards.service.js';
 
-export const get = async(req, res) => {
+export const getOne = async(req, res) => {
   const { id } = req.params;
 
   if (!id) {
@@ -13,6 +13,12 @@ export const get = async(req, res) => {
   const board = await boardsService.getById(id);
 
   res.send(board);
+};
+
+export const get = async(req, res) => {
+  const boards = await boardsService.getAll();
+
+  res.send(boards);
 };
 
 export const post = async(req, res) => {

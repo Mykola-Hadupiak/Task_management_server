@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import express from 'express';
+import cors from 'cors';
 import 'dotenv/config';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import { router as cardsRouter } from './routes/cards.route.js';
@@ -8,6 +9,8 @@ import { router as boardsRouter } from './routes/boards.route.js';
 const PORT = process.env.PORT || 3005;
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 app.use('/boards', boardsRouter);

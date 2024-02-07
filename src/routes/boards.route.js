@@ -4,6 +4,7 @@ import * as boardsController from '../controllers/boards.controller.js';
 
 export const router = express.Router();
 
-router.get('/:id', catchError(boardsController.get));
+router.get('/', catchError(boardsController.get));
+router.get('/:id', catchError(boardsController.getOne));
 router.post('/', catchError(boardsController.post));
 router.delete('/:id', catchError(boardsController.remove));
