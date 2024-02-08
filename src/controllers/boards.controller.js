@@ -10,7 +10,7 @@ export const getOne = async(req, res) => {
     });
   }
 
-  const board = await boardsService.getById(id);
+  const board = await boardsService.getOne(id);
 
   res.send(board);
 };
@@ -24,7 +24,7 @@ export const get = async(req, res) => {
 export const post = async(req, res) => {
   const board = await boardsService.create();
 
-  res.send(board.id);
+  res.send(board);
 };
 
 export const remove = async(req, res) => {

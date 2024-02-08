@@ -14,6 +14,18 @@ export const getById = async(id) => {
   }
 };
 
+export const getOne = async(id) => {
+  try {
+    const board = await Boards.findByPk(id);
+
+    return board;
+  } catch (error) {
+    throw ApiError.notFound('Cannot find', {
+      board: 'Board not found',
+    });
+  }
+};
+
 export const getAll = async() => {
   try {
     const boards = await Boards.findAll();

@@ -5,6 +5,7 @@ import 'dotenv/config';
 import { errorMiddleware } from './middlewares/errorMiddleware.js';
 import { router as cardsRouter } from './routes/cards.route.js';
 import { router as boardsRouter } from './routes/boards.route.js';
+import './setup.js';
 
 const PORT = process.env.PORT || 3005;
 
