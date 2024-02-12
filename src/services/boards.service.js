@@ -49,11 +49,15 @@ export const create = async() => {
 };
 
 export const remove = async(id) => {
-  await Boards.destroy({
-    where: {
-      id,
-    },
-  });
+  try {
+    await Boards.destroy({
+      where: {
+        id,
+      },
+    });
 
-  await cardsService.removeMany(id);
+    await cardsService.removeMany(id);
+  } catch (error) {
+    throw ApiError.cannotCreate('Cannot delete board');
+  }
 };

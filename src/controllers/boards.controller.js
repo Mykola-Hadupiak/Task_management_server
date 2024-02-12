@@ -36,6 +36,14 @@ export const remove = async(req, res) => {
     });
   }
 
+  const board = await boardsService.getOne(id);
+
+  if (!board) {
+    throw ApiError.notFound('Cannot find board', {
+      board: 'Board not found',
+    });
+  }
+
   await boardsService.remove(id);
 
   res.sendStatus(204);

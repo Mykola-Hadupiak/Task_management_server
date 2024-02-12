@@ -76,7 +76,15 @@ export const removeMany = async(boardId) => {
 };
 
 export const update = async(id, data) => {
-  await Cards.update({ ...data }, {
-    where: { id },
-  });
+  try {
+    await Cards.update({ ...data }, {
+      where: { id },
+    });
+
+    const updatedCard = await getOne(id);
+
+    return updatedCard;
+  } catch (error) {
+    throw ApiError.cannotPost('Cannot update cards');
+  }
 };

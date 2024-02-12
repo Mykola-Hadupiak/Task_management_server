@@ -73,14 +73,12 @@ export const update = async(req, res) => {
     });
   }
 
-  await cardsService.update(id, {
+  const updatedCard = await cardsService.update(id, {
     status,
     title,
     description,
     boardId,
   });
 
-  const updatedTodo = await cardsService.getOne(id);
-
-  res.send(cardsService.normalizedCard(updatedTodo));
+  res.send(cardsService.normalizedCard(updatedCard));
 };
