@@ -8,3 +8,4 @@ router.get('/', catchError(boardsController.get));
 router.get('/:id', catchError(boardsController.getOne));
 router.post('/', catchError(boardsController.post));
 router.delete('/:id', catchError(boardsController.remove));
+router.put('/:id', catchError(boardsController.updateSorted));

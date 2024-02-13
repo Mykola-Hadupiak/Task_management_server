@@ -8,6 +8,10 @@ export const Boards = client.define('Boards', {
     primaryKey: true,
     allowNull: false,
   },
+  sorted: {
+    type: DataTypes.ARRAY(DataTypes.UUID),
+    defaultValue: [],
+  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,

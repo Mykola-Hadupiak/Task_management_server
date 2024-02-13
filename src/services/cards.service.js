@@ -43,6 +43,9 @@ export const create = async(boardId, { title, description }) => {
     }
 
     const card = await Cards.create({ title, description, boardId });
+
+    await boardsService.addToSorted(boardId, card.id);
+
     const normalized = normalizedCard(card);
 
     return normalized;
@@ -53,11 +56,16 @@ export const create = async(boardId, { title, description }) => {
 
 export const remove = async(id) => {
   try {
+    const card = await getOne(id);
+    const boardId = card.boardId;
+
     await Cards.destroy({
       where: {
         id,
       },
     });
+
+    await boardsService.removeFromSorted(boardId, card.id);
   } catch (error) {
     throw ApiError.cannotPost('Cannot delete');
   }

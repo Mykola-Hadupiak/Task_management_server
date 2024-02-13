@@ -61,3 +61,39 @@ export const remove = async(id) => {
     throw ApiError.cannotCreate('Cannot delete board');
   }
 };
+
+export const addToSorted = async(boardId, cardId) => {
+  try {
+    const board = await getOne(boardId);
+    const sorted = [...board.sorted, cardId];
+
+    await Boards.update({ sorted }, { where: { id: boardId } });
+
+    return sorted;
+  } catch (error) {
+    throw ApiError.cannotPost('Cannot update sorted cards');
+  }
+};
+
+export const removeFromSorted = async(boardId, cardId) => {
+  try {
+    const board = await getOne(boardId);
+    const sorted = board.sorted.filter(id => id !== cardId);
+
+    await Boards.update({ sorted }, { where: { id: boardId } });
+
+    return sorted;
+  } catch (error) {
+    throw ApiError.cannotPost('Cannot update sorted cards');
+  }
+};
+
+export const updateSorted = async(boardId, sorted) => {
+  try {
+    await Boards.update({ sorted }, { where: { id: boardId } });
+
+    return sorted;
+  } catch (error) {
+    throw ApiError.cannotPost('Cannot update sorted cards');
+  }
+};

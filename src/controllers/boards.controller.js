@@ -48,3 +48,26 @@ export const remove = async(req, res) => {
 
   res.sendStatus(204);
 };
+
+export const updateSorted = async(req, res) => {
+  const { id } = req.params;
+  const { sorted } = req.body;
+
+  if (!id || !sorted) {
+    throw ApiError.badRequest('Board error', {
+      board: 'Board id and sorted are required',
+    });
+  }
+
+  const board = await boardsService.getOne(id);
+
+  if (!board) {
+    throw ApiError.notFound('Cannot find board', {
+      board: 'Board not found',
+    });
+  }
+
+  const updatedSorted = await boardsService.updateSorted(id, sorted);
+
+  res.send(updatedSorted);
+};
